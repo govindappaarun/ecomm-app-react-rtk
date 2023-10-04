@@ -5,5 +5,13 @@
 }
 
 .links {
-  margin-left: auto;
+  display: flex;
+  justify-content: end;
+}
+.links a {
+  text-decoration: none;
+  color: #fff;
+}
+.links a:hover {
+  text-decoration: underline;
 }
