@@ -1,20 +1,11 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import "./style.css";
 import NavBar from "../../Components/NavBar";
 import FeatureProducts from "./Products/Feature-Products";
 
-export default function () {
-  const { state } = useLocation();
+export default function Home() {
   return (
-    <div>
-      <div className="top-bar">
-        <div className="links d-flex gap-3">
-          <NavLink to="/login">SignIn / Guest</NavLink>
-          <NavLink to="/register">Register</NavLink>
-        </div>
-      </div>
-      <NavBar />
-      <main style={{ marginLeft: "100px" }}>
+     <main style={{ marginLeft: "100px" }}>
         <section className="hero d-flex gap-2">
           <div
             className="d-flex flex-column align-items-start justify-content-center px-5 gap-3"
@@ -26,7 +17,7 @@ export default function () {
               repellat explicabo enim soluta temporibus asperiores aut obcaecati
               perferendis porro nobis.
             </p>
-            <button className="btn btn-primary btn-lg">Our Products</button>
+            <Link to="products" className="btn btn-primary btn-lg">Our Products</Link>
           </div>
           <img
             style={{ width: "50%", height: "450px" }}
@@ -39,7 +30,6 @@ export default function () {
           <hr />
           <FeatureProducts />
         </section>
-      </main>
-    </div>
+      </main> 
   );
 }

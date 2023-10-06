@@ -15,3 +15,8 @@
 .links a:hover {
   text-decoration: underline;
 }
+
+.product-details img {
+  max-width: 500px;
+  border-radius: 5px;
+}
