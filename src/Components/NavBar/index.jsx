@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import "./style.css";
-import { BsCart2, BsMoonFill, BsMoon } from "react-icons/bs";
+import { BsCart2, BsMoon } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
-export default function () {
+import { CartContext } from "../../Contexts/CartContext";
+export default function NavBar() {
+  const { state } = useContext(CartContext);
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -52,6 +55,7 @@ export default function () {
             <div className="d-flex gap-2">
               <BsMoon />
               <BsCart2 />
+              {state.totalCount}
             </div>
           </div>
         </div>

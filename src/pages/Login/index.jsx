@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
 import { useState } from "react";
 
-export default function () {
+export default function Login() {
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
