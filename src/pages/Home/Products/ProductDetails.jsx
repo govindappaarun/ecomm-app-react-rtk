@@ -45,7 +45,10 @@ export default function ProductDetails() {
             </select>
             <button
               onClick={() =>
-                dispatch({ action: "ADD_ITEM_CART", value: { id, count } })
+                dispatch({
+                  action: "ADD_ITEM_CART",
+                  value: { id, ...productDetails, count },
+                })
               }
             >
               Add to Cart

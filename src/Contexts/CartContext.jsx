@@ -12,23 +12,37 @@ function cartReducer(state, payload) {
       return {
         ...state,
         items: [...state.items, value],
-        totalCount: state.totalCount + (+value.count),
+        totalCount: state.totalCount + +value.count,
       };
-    case "REMOVE_ITEM_CART":
+    case "REMOVE_ITEM_CART": {
+      let itemFound;
       return {
         ...state,
-        items: state.items.filter((item) => item.id != value.id),
+        items: state.items.filter((item) => {
+          if (item.id == value.id) {
+            itemFound = item;
+            return false;
+          }
+          return true;
+        }),
+        totalCount: state.totalCount - itemFound.count,
       };
-    case "UPDATE_ITEM_CART":
+    }
+    case "UPDATE_ITEM_CART": {
+      // console.log(payload);
+      let prevItemState;
       return {
         ...state,
         items: state.items.map((item) => {
           if (item.id === value.id) {
+            prevItemState = item;
             return { ...item, count: value.count };
           }
           return item;
         }),
+        totalCount: state.totalCount + +value.count - prevItemState.count,
       };
+    }
     case "CLEAR_CART":
       return initialState;
     default:
@@ -39,6 +53,9 @@ function cartReducer(state, payload) {
 const CartContextProvider = (props) => {
   // state
   const [state, dispatch] = useReducer(cartReducer, initialState);
+
+  // const handle
+
   return (
     <CartContext.Provider value={{ state, dispatch }}>
       {props.children}
