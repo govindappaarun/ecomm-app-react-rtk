@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
 import { useState } from "react";
+import axios from "axios";
 
 export default function Login() {
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
@@ -15,10 +16,23 @@ export default function Login() {
     e.preventDefault();
     console.log(loginForm);
     if (loginForm.email.length && loginForm.password.length) {
-      // ToDo to post to login API
-      navigate("/", { state: loginForm });
-      setLoginForm({ email: "", password: "" });
+      doLogin({ ...loginForm });
     }
+  };
+  const doLogin = ({ email, password }) => {
+    axios
+      .post("https://strapi-store-server.onrender.com/api/auth/local", {
+        identifier: email,
+        password: password,
+      })
+      .then((res) => {
+        setLoginForm({ email: "", password: "" });
+        localStorage.setItem("user", JSON.stringify(res.data));
+        navigate("/");
+      });
+  };
+  const handleGuestLogin = () => {
+    doLogin({ email: "test@test.com", password: "secret" });
   };
 
   return (
@@ -67,7 +81,11 @@ export default function Login() {
             <button type="submit" className="btn btn-primary">
               Submit
             </button>
-            <button type="button" className="btn btn-info">
+            <button
+              type="button"
+              className="btn btn-info"
+              onClick={handleGuestLogin}
+            >
               Guest User
             </button>
           </div>

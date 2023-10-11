@@ -1,9 +1,11 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../../../Contexts/CartContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
   const { state, dispatch } = useContext(CartContext);
   const [count, setCount] = useState(1);
+  const navigate = useNavigate();
 
   const handleQtyChange = (e, id) => {
     setCount(e.target.value);
@@ -19,7 +21,8 @@ export default function Cart() {
   };
 
   const handleCheckOut = () => {
-    dispatch({ action: "CLEAR_CART" }); // fine
+    // dispatch({ action: "CLEAR_CART" }); // fine
+    navigate("/order");
   };
 
   return (

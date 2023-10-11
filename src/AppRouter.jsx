@@ -7,6 +7,8 @@ import Layout from "./pages/Home/Layout";
 import ProductDetails from "./pages/Home/Products/ProductDetails";
 import About from "./pages/Home/About";
 import Cart from "./pages/Home/Cart";
+import PlaceOrder from "./pages/Home/PlaceOrder";
+import Orders from "./pages/Home/Orders";
 
 function AppRouter() {
   return (
@@ -18,6 +20,8 @@ function AppRouter() {
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/about" element={<About />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/order" element={<PlaceOrder />} />
+        <Route path="/orderList" element={<Orders />} />
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
