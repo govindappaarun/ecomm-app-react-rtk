@@ -53,7 +53,7 @@ export default function PlaceOrder() {
           },
         }
       )
-      .then(() => navigate("/orders"));
+      .then(() => navigate("/orderList"));
   };
 
   return (

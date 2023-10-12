@@ -9,6 +9,7 @@ import About from "./pages/Home/About";
 import Cart from "./pages/Home/Cart";
 import PlaceOrder from "./pages/Home/PlaceOrder";
 import Orders from "./pages/Home/Orders";
+import CrudOperations from "./pages/CRUD";
 
 function AppRouter() {
   return (
@@ -25,6 +26,7 @@ function AppRouter() {
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/crud" element={<CrudOperations />} />
     </Routes>
   );
 }
