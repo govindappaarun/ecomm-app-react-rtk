@@ -10,7 +10,7 @@ export default function ProductFilterForm(props) {
     company: companies[0],
     category: categories[0],
     shipping: "",
-    price: "",
+    price: 100000,
   });
 
   const handleChange = (e) => {
@@ -23,7 +23,8 @@ export default function ProductFilterForm(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    // console.log(form);
+    props.handleSearch(form);
   };
 
   return (
@@ -89,6 +90,8 @@ export default function ProductFilterForm(props) {
             <input
               type="range"
               name="price"
+              min="0"
+              max="100000"
               className="form-control"
               value={form.price}
               onChange={handleChange}
