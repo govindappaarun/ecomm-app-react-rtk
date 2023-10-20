@@ -1,12 +1,21 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
-import { useState } from "react";
-import axios from "axios";
-
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { doLogin as doLoginAction } from "../../redux/reducers/authSlice";
 export default function Login() {
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {isLoggedIn, user} = useSelector(state => state.auth);
 
+  useEffect(()=> {
+    if(isLoggedIn){
+      setLoginForm({ email: "", password: "" });
+      localStorage.setItem("user", JSON.stringify(user));
+      navigate("/");
+    }
+  }, [isLoggedIn])
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLoginForm((prev) => ({ ...prev, [name]: value }));
@@ -20,16 +29,19 @@ export default function Login() {
     }
   };
   const doLogin = ({ email, password }) => {
-    axios
-      .post("https://strapi-store-server.onrender.com/api/auth/local", {
-        identifier: email,
-        password: password,
-      })
-      .then((res) => {
-        setLoginForm({ email: "", password: "" });
-        localStorage.setItem("user", JSON.stringify(res.data));
-        navigate("/");
-      });
+    // axios
+    //   .post("https://strapi-store-server.onrender.com/api/auth/local", {
+    //     identifier: email,
+    //     password: password,
+    //   })
+    //   .then((res) => {
+    //     setLoginForm({ email: "", password: "" });
+    //     localStorage.setItem("user", JSON.stringify(res.data));
+    //     navigate("/");
+    //   });
+    dispatch(doLoginAction({email, password}));
+
+    
   };
   const handleGuestLogin = () => {
     doLogin({ email: "test@test.com", password: "secret" });
