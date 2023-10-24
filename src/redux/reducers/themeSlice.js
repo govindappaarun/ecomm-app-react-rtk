@@ -1,6 +1,4 @@
-import { createAction, createSlice, current } from "@reduxjs/toolkit";
-
-// export const toggleTheme = createAction("theme/toggle");
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const themeSlice = createSlice({
   name: "theme",
@@ -13,14 +11,5 @@ const themeSlice = createSlice({
   },
 });
 
-/* 
-(builder) => {
-    builder.addCase(toggleTheme, (state) => {
-      console.log("in reducer to switch ***");
-      console.log(current(state));
-      state.value = state.value === "light" ? "dark" : "light";
-    });
-  },
-*/
 export const { toggleTheme } = themeSlice.actions;
 export default themeSlice.reducer;

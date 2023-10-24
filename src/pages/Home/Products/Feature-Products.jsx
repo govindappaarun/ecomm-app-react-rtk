@@ -1,16 +1,24 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+// import { useEffect, useState } from "react";
+// import axios from "axios";
+import { useEffect } from "react";
 import ProductCard from "./ProductCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getFeatureProducts } from "../../../redux/reducers/productSlice";
 
-const featureProductsUrl =
-  "https://strapi-store-server.onrender.com/api/products?featured=true";
+// const featureProductsUrl =
+//   "https://strapi-store-server.onrender.com/api/products?featured=true";
 
 export default function FeatureProducts() {
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products.featureProducts);
+  
+  // useEffect(() => {
+  //   axios.get(featureProductsUrl).then((res) => setProducts(res.data.data));
+  // }, []);
 
   useEffect(() => {
-    axios.get(featureProductsUrl).then((res) => setProducts(res.data.data));
-  }, []);
+    dispatch(getFeatureProducts());
+  }, [dispatch]);
 
   return (
     <div>
