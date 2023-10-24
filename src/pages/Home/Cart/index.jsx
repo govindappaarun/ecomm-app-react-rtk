@@ -1,12 +1,13 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../../Contexts/CartContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
   const { state, dispatch } = useContext(CartContext);
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState();
   const navigate = useNavigate();
 
+  useEffect(() => {}, []);
   const handleQtyChange = (e, id) => {
     setCount(e.target.value);
     console.log(count);
@@ -33,10 +34,10 @@ export default function Cart() {
       {state.items.map((item) => (
         <div key={item.id}>
           <h4>Item {item.id} </h4>
-          {item.count}
           <select
             name="count"
             value={count}
+            defaultValue={item.count}
             onChange={(e) => handleQtyChange(e, item.id)}
           >
             {[1, 2, 3, 4, 5].map((opt) => (

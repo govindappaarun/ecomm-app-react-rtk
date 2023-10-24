@@ -8,12 +8,21 @@ const initialState = { items: [], totalCount: 0 };
 function cartReducer(state, payload) {
   const { action, value } = payload;
   switch (action) {
-    case "ADD_ITEM_CART":
+    case "ADD_ITEM_CART": {
+      let itemFound = state.items.find((item) => item.id === value.id);
       return {
         ...state,
-        items: [...state.items, value],
+        items: itemFound
+          ? state.items.map((item) => {
+              if (item.id === value.id) {
+                return { ...item, count: item.count + +value.count };
+              }
+              return item;
+            })
+          : [...state.items, value],
         totalCount: state.totalCount + +value.count,
       };
+    }
     case "REMOVE_ITEM_CART": {
       let itemFound;
       return {
